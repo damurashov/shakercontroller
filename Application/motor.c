@@ -148,4 +148,5 @@ void motorInit(void)
 	init.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(MOTOR_DIR_2_PORT, &init);
 
+	HAL_ADC_Start_IT(&hadc);
 }
