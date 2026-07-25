@@ -64,4 +64,3 @@ void motorInit(void);
 #endif  /* __ASSEMBLY__ */
 
 #endif /* APPLICATION_MOTOR_H_ */
-

@@ -39,7 +39,7 @@ static int sIEp = 0;
 static int sEpContact = 0xff;
 
 /* 12-bit ADC (4096), 3.3V rail voltage, 1.65 Hall sensor's value when no flux */
-static const int32_t sMedianAdc = 2048;
+static const int32_t sMeanAdc = 2048;
 static const int32_t sMarginAdc = (int32_t)(0.3f / 3.3f * 4096.0f);
 
 /****************************************************************************
@@ -61,7 +61,7 @@ void epsPush(uint32_t aValue)
 
 void epsDetectContact(int32_t aValue)
 {
-	if (((aValue - sMedianAdc) & 0x7fffffff /* 32-bit abs() */) >= sMarginAdc)
+	if (((aValue - sMeanAdc) & 0x7fffffff /* 32-bit abs() */) >= sMarginAdc)
 	{
 		sEpContact = sIEp;
 	}
