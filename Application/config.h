@@ -20,16 +20,7 @@
 #define MOTOR_DIR_1_PORT (GPIOA)
 #define MOTOR_DIR_2_PIN (LL_GPIO_PIN_1)
 #define MOTOR_DIR_2_PORT (GPIOA)
-#define ENDPOINT_1_PIN (LL_GPIO_PIN_2)
-#define ENDPOINT_1_PORT (GPIOA)
-#define ENDPOINT_1_ISR_FUNC_NAME EXTI2_3_IRQHandler
-#define ENDPOINT_1_IRQN (EXTI2_3_IRQn)
-#define ENDPOINT_1_EXTI_LINE (LL_EXTI_LINE_2)
-#define ENDPOINT_2_PIN (LL_GPIO_PIN_3)
-#define ENDPOINT_2_PORT (GPIOA)
-#define ENDPOINT_2_ISR_FUNC_NAME EXTI2_3_IRQHandler
-#define ENDPOINT_2_IRQN (EXTI2_3_IRQn)
-#define ENDPOINT_2_EXTI_LINE (LL_EXTI_LINE_3)
+#define MOTOR_HALL_EP_ADC_HANDLER ADC1_IRQHandler
 
 /****************************************************************************
 * Public Types
@@ -69,4 +60,3 @@ extern "C"
 #endif  /* __ASSEMBLY__ */
 
 #endif /* APPLICATION_PINOUT_H_ */
-
