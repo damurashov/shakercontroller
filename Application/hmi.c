@@ -14,6 +14,11 @@
  * Included files
  ****************************************************************************/
 
+#include "config.h"
+#include <stm32f0xx_hal.h>
+#include <stm32f0xx_ll_exti.h>
+#include <stm32f0xx_ll_gpio.h>
+
 /****************************************************************************
  * Private Types
  ****************************************************************************/
@@ -54,10 +59,10 @@ void hmiSetMotorLed(int aValue)
 {
 	if (aValue)
 	{
-		LL_GPIO_SetOutputPin(HMI_MOTOR_LET_PORT, HMI_MOTOR_LED_PIN);
+		LL_GPIO_SetOutputPin(HMI_MOTOR_LED_PORT, HMI_MOTOR_LED_PIN);
 	}
 	else
 	{
-		LL_GPIO_ResetOutputPin(HMI_MOTOR_LET_PORT, HMI_MOTOR_LED_PIN);
+		LL_GPIO_ResetOutputPin(HMI_MOTOR_LED_PORT, HMI_MOTOR_LED_PIN);
 	}
 }

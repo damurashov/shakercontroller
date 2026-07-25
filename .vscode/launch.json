@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/stmcode.elf",
+            "name": "Debug (NO FLASH) with ST-Util",
+            "request": "attach",
+            "loadFiles": [],              // 👈 prevents flashing
+            "preLaunchTask": null,         // 👈 avoids rebuilding if you want
+            "type": "cortex-debug",
+            // "runToEntryPoint": "main",
+            "showDevDebugOutput": "raw",
+            "servertype": "stutil",
+            "svdFile": "STM32F103.svd",
+            "swoConfig": {
+                "swoFrequency": 1000000
+            },
+            "armToolchainPath": "/home/dm/bin/gcc-arm-none-eabi-14.3.rel1/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi/bin/"
+        },
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/stmcode.elf",
+            "name": "Flash firmware with ST-Util",
+            "request": "launch",
+            "type": "cortex-debug",
+            // "runToEntryPoint": "main",
+            "showDevDebugOutput": "raw",
+            "servertype": "stutil",
+            "svdFile": "STM32F103.svd",
+            "swoConfig": {
+                "swoFrequency": 1000000
+            },
+            "armToolchainPath": "/home/dm/bin/gcc-arm-none-eabi-14.3.rel1/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi/bin/"
+        }
+    ]
+}

@@ -57,6 +57,7 @@ Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c \
 Core/Src/system_stm32f0xx.c \
 Application/appmain.c \
 Application/motor.c \
+Application/hmi.c \
 Core/Src/gpio.c \
 Core/Src/adc.c \
 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc.c \
