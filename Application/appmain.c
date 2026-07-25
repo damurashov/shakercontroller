@@ -17,7 +17,7 @@ void applicationMain(void)
 
 	while (1)
 	{
-		hmiSetMotorLed(1);
+		hmiSetMotorLed(0);
 		if (motorIsEp1Contact())
 		{
 			motorSetDir(DirEp2);
