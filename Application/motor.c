@@ -132,6 +132,8 @@ void motorSetDir(int dir)
 
 void motorInit(void)
 {
+	MOTOR_DIR_CLK_ENABLE();
+
 	GPIO_InitTypeDef init;
 
 	init.Pin = MOTOR_DIR_1_PIN;
@@ -145,4 +147,5 @@ void motorInit(void)
 	init.Pull = GPIO_NOPULL;
 	init.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(MOTOR_DIR_2_PORT, &init);
+
 }

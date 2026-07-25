@@ -1,12 +1,14 @@
 /**
- * pinout.h
+ * hmi.h
  *
- * Created on: July 22, 2026
+ * Created on: July 25, 2026
  *     Author: Dmitry Murashov
+ *
+ * HMI - Human-Machine Inteface (LED indication)
  */
 
-#ifndef APPLICATION_PINOUT_H_
-#define APPLICATION_PINOUT_H_
+#ifndef APPLICATION_HMI_H_
+#define APPLICATION_HMI_H_
 
 /****************************************************************************
 * Included Files
@@ -15,16 +17,6 @@
 /****************************************************************************
 * Pre-processor Definitions
 ****************************************************************************/
-
-#define MOTOR_DIR_1_PIN (LL_GPIO_PIN_0)
-#define MOTOR_DIR_1_PORT (GPIOA)
-#define MOTOR_DIR_2_PIN (LL_GPIO_PIN_1)
-#define MOTOR_DIR_2_PORT (GPIOA)
-#define MOTOR_DIR_CLK_ENABLE() __GPIOA_CLK_ENABLE()
-#define MOTOR_HALL_EP_ADC_HANDLER ADC1_IRQHandler
-#define HMI_MOTOR_LED_PIN (LL_GPIO_PIN_4)
-#define HMI_MOTOR_LED_PORT (GPIOA)
-#define HMI_MOTOR_CLK_ENABLE() __GPIOA_CLK_ENABLE()
 
 /****************************************************************************
 * Public Types
@@ -52,6 +44,9 @@ extern "C"
 * Public Function Prototypes
 ****************************************************************************/
 
+void hmiInit(void);
+void hmiSetMotorLed(int aOn);
+
 /****************************************************************************
  * Inline Functions
  ****************************************************************************/
@@ -63,4 +58,5 @@ extern "C"
 
 #endif  /* __ASSEMBLY__ */
 
-#endif /* APPLICATION_PINOUT_H_ */
+#endif /* APPLICATION_HMI_H_ */
+
