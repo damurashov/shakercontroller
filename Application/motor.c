@@ -92,22 +92,22 @@ void MOTOR_HALL_EP_ADC_HANDLER(void)
 
 int motorIsEp1Contact(void)
 {
-	int ret = (sEpContact == DirEp1);
-	if (ret)
+	if (sEpContact == DirEp1)
 	{
 		sEpContact = 0xff;
+		return 1;
 	}
-	return ret;
+	return 0;
 }
 
 int motorIsEp2Contact(void)
 {
-	int ret = (sEpContact == DirEp2);
-	if (ret)
+	if (sEpContact == DirEp2)
 	{
 		sEpContact = 0xff;
+		return 1;
 	}
-	return ret;
+	return 0;
 }
 
 void motorSetDir(int dir)
