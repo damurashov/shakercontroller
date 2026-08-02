@@ -15,7 +15,7 @@
             // "runToEntryPoint": "main",
             "showDevDebugOutput": "raw",
             "servertype": "stutil",
-            "svdFile": "STM32F103.svd",
+            "svdFile": "STM32F0x0.svd",
             "swoConfig": {
                 "swoFrequency": 1000000
             },
@@ -30,7 +30,7 @@
             // "runToEntryPoint": "main",
             "showDevDebugOutput": "raw",
             "servertype": "stutil",
-            "svdFile": "STM32F103.svd",
+            "svdFile": "STM32F0x0.svd",
             "swoConfig": {
                 "swoFrequency": 1000000
             },
