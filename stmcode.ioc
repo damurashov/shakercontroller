@@ -1,7 +1,8 @@
 #MicroXplorer Configuration settings - do not modify
 ADC.ContinuousConvMode=DISABLE
+ADC.DiscontinuousConvMode=ENABLE
 ADC.EOCSelection=ADC_EOC_SINGLE_CONV
-ADC.IPParameters=ContinuousConvMode,SamplingTime,Overrun,EOCSelection
+ADC.IPParameters=ContinuousConvMode,SamplingTime,Overrun,EOCSelection,DiscontinuousConvMode
 ADC.Overrun=ADC_OVR_DATA_OVERWRITTEN
 ADC.SamplingTime=ADC_SAMPLETIME_55CYCLES_5
 CAD.formats=
