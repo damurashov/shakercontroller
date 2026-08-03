@@ -66,7 +66,10 @@ void epsPush(uint32_t aValue)
 
 void epsDetectContact(int32_t aValue)
 {
-	if (((aValue - sMeanAdc) & 0x7fffffff /* 32-bit abs() */) >= sMarginAdc)
+	volatile int32_t absdiff = aValue > sMeanAdc ?
+		aValue - sMeanAdc :
+		sMeanAdc - aValue;
+	if (absdiff >= sMarginAdc)
 	{
 		sEpContact = sIEp;
 	}
@@ -75,23 +78,11 @@ void epsDetectContact(int32_t aValue)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *aHandle)
 /* void MOTOR_HALL_EP_ADC_HANDLER(void) */
 {
-	volatile uint32_t isr = aHandle->Instance->ISR;
-	int32_t val = (int32_t)aHandle->Instance->DR;
-
+	int32_t val = HAL_ADC_GetValue(aHandle);
 	/* End of conversion. Push the next value */
 	epsDetectContact(val);
 	epsPush(val);
-
-	if (isr & ADC_ISR_EOSEQ)
-	{
-		++sSync.it;
-	}
-	if (isr & ADC_ISR_OVR)
-	{
-		/* XXX An overrun should never happen. If it has, a conversion has been
-		 * missed, so we should wait for the next EOSEQ, to reset the FIFO
-		 * counter, and start over from 0th element */
-	}
+	++sSync.it;
 }
 
 /****************************************************************************
