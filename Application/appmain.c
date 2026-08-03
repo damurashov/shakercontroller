@@ -31,5 +31,6 @@ void applicationMain(void)
 		{
 			hmiSetMotorLed(0);
 		}
+		motorLoop();
 	}
 }
