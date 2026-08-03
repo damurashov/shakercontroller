@@ -50,7 +50,7 @@ void MX_ADC_Init(void)
   hadc.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc.Init.LowPowerAutoWait = DISABLE;
   hadc.Init.LowPowerAutoPowerOff = DISABLE;
-  hadc.Init.ContinuousConvMode = ENABLE;
+  hadc.Init.ContinuousConvMode = DISABLE;
   hadc.Init.DiscontinuousConvMode = DISABLE;
   hadc.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
@@ -63,9 +63,9 @@ void MX_ADC_Init(void)
 
   /** Configure for the selected ADC regular channel to be converted.
   */
-  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
-  sConfig.SamplingTime = ADC_SAMPLETIME_41CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
   if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -73,7 +73,7 @@ void MX_ADC_Init(void)
 
   /** Configure for the selected ADC regular channel to be converted.
   */
-  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Channel = ADC_CHANNEL_1;
   if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -98,10 +98,10 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**ADC GPIO Configuration
-    PA2     ------> ADC_IN2
-    PA3     ------> ADC_IN3
+    PA0     ------> ADC_IN0
+    PA1     ------> ADC_IN1
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -127,10 +127,10 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
     __HAL_RCC_ADC1_CLK_DISABLE();
 
     /**ADC GPIO Configuration
-    PA2     ------> ADC_IN2
-    PA3     ------> ADC_IN3
+    PA0     ------> ADC_IN0
+    PA1     ------> ADC_IN1
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0|GPIO_PIN_1);
 
     /* ADC1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(ADC1_IRQn);
