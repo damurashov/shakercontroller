@@ -42,6 +42,11 @@ static int sEpContact = 0xff;
 static const int32_t sMeanAdc = 2048;
 static const int32_t sMarginAdc = (int32_t)(0.3f / 3.3f * 4096.0f);
 
+static struct {
+	volatile int it;
+	volatile int thread;
+} sSync = {0, 0};
+
 /****************************************************************************
  * Public Data
  ****************************************************************************/
@@ -61,29 +66,23 @@ void epsPush(uint32_t aValue)
 
 void epsDetectContact(int32_t aValue)
 {
-	if (((aValue - sMeanAdc) & 0x7fffffff /* 32-bit abs() */) >= sMarginAdc)
+	volatile int32_t absdiff = aValue > sMeanAdc ?
+		aValue - sMeanAdc :
+		sMeanAdc - aValue;
+	if (absdiff >= sMarginAdc)
 	{
 		sEpContact = sIEp;
 	}
 }
 
-void MOTOR_HALL_EP_ADC_HANDLER(void)
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *aHandle)
+/* void MOTOR_HALL_EP_ADC_HANDLER(void) */
 {
-	volatile uint32_t isr = hadc.Instance->ISR;
-	if (isr & (ADC_ISR_EOC | ADC_ISR_EOSEQ))
-	{
-		int32_t val = (int32_t)hadc.Instance->DR;
-		/* End of conversion. Push the next value */
-		epsDetectContact(val);
-		epsPush(val);
-		hadc.Instance->ISR |= (ADC_ISR_EOC | ADC_ISR_EOSEQ);
-	}
-	if (isr & ADC_ISR_OVR)
-	{
-		/* XXX An overrun should never happen. If it has, a conversion has been
-		 * missed, so we should wait for the next EOSEQ, to reset the FIFO
-		 * counter, and start over from 0th element */
-	}
+	int32_t val = HAL_ADC_GetValue(aHandle);
+	/* End of conversion. Push the next value */
+	epsDetectContact(val);
+	epsPush(val);
+	++sSync.it;
 }
 
 /****************************************************************************
@@ -149,4 +148,14 @@ void motorInit(void)
 	HAL_GPIO_Init(MOTOR_DIR_2_PORT, &init);
 
 	HAL_ADC_Start_IT(&hadc);
+}
+
+void motorLoop(void)
+{
+	if (sSync.it != sSync.thread)
+	{
+		sSync.thread = sSync.it;
+		HAL_ADC_Start_IT(&hadc);
+		/* TODO DM launch the conversion */
+	}
 }

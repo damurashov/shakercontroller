@@ -51,6 +51,7 @@ int motorIsEp1Contact(void);
 int motorIsEp2Contact(void);
 void motorSetDir(int dir);
 void motorInit(void);
+void motorLoop(void);
 
 /****************************************************************************
  * Inline Functions
