@@ -111,18 +111,29 @@ int motorIsEp2Contact(void)
 
 void motorSetDir(int dir)
 {
+	static int current = 0xff;
+	int needPause = (current != dir);
+	current = dir;
 	switch (dir)
 	{
 		case DirEp1:
 		{
-			LL_GPIO_SetOutputPin(MOTOR_DIR_1_PORT, MOTOR_DIR_1_PIN);
 			LL_GPIO_ResetOutputPin(MOTOR_DIR_2_PORT, MOTOR_DIR_2_PIN);
+			if (needPause)
+			{
+				HAL_Delay(500);
+			}
+			LL_GPIO_SetOutputPin(MOTOR_DIR_1_PORT, MOTOR_DIR_1_PIN);
 			break;
 		}
 		case DirEp2:
 		default:
 		{
 			LL_GPIO_ResetOutputPin(MOTOR_DIR_1_PORT, MOTOR_DIR_1_PIN);
+			if (needPause)
+			{
+				HAL_Delay(500);
+			}
 			LL_GPIO_SetOutputPin(MOTOR_DIR_2_PORT, MOTOR_DIR_2_PIN);
 			break;
 		}
