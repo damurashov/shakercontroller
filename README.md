@@ -13,3 +13,7 @@ come soon (today is 2026-07-25).
 1.0.0 - 2026-08
 
 - Peripherals: Changed the pinout. Changed ADC channels to 0, and 1. Moved motor control to PA6, PA7 (TIM outputs), in case TIM will be needed. Resolved the ADC issues
+
+1.0.1 - D. Murashov, 2026-08
+
+- Kinematics: added delay before changing the direction, to let the system settle (D. Murashov, 2026-08)
