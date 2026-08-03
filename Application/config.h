@@ -16,9 +16,9 @@
 * Pre-processor Definitions
 ****************************************************************************/
 
-#define MOTOR_DIR_1_PIN (LL_GPIO_PIN_0)
+#define MOTOR_DIR_1_PIN (LL_GPIO_PIN_6)
 #define MOTOR_DIR_1_PORT (GPIOA)
-#define MOTOR_DIR_2_PIN (LL_GPIO_PIN_1)
+#define MOTOR_DIR_2_PIN (LL_GPIO_PIN_7)
 #define MOTOR_DIR_2_PORT (GPIOA)
 #define MOTOR_DIR_CLK_ENABLE() __GPIOA_CLK_ENABLE()
 #define MOTOR_HALL_EP_ADC_HANDLER ADC1_IRQHandler
